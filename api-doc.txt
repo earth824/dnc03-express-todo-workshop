@@ -20,3 +20,59 @@ FEATURE AUTH:
           200 user
           401 message
           404 message
+
+FEATURE USER
+  - DELETE USER
+      DELETE /users/:id
+        HEADER Authorization: Bearer xxxxxxxxxx
+        RESPONSE
+          204
+          401 message
+          403 message
+          404 message
+
+FEATURE TODO
+  - CREATE TODO
+      POST /todos
+        HEADER Authorization: Bearer xxxxxxxxxx
+        BODY title, completed?
+        RESPONSE
+          201 todo
+          400 message
+          401 message
+  - DELETE TODO
+      DELETE /todos/:id
+        HEADER Authorization: Bearer xxxxxxxxxx
+        RESPONSE
+          204
+          400 message
+          401 message
+          403 message
+          404 message
+  - GET ALL todos
+      GET /todos
+        HEADER Authorization: Bearer xxxxxxxxxx
+        QUERY completed(true, false)
+        RESPONSE
+          200 todos
+          400 message
+          401 message
+  - GET TODO BY ID
+      GET /todos/:id
+        HEADER Authorization: Bearer xxxxxxxxxx
+        RESPONSE
+          200 todo
+          400 message
+          401 message
+          403 message
+          404 message
+  - UPDATE TODO BY ID
+      PUT /todos/:id
+        HEADER Authorization: Bearer xxxxxxxxxx
+        BODY title?, completed?
+        RESPONSE
+          200 todo
+          400 message
+          401 message
+          403 message
+          404 message

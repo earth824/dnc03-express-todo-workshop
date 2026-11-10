@@ -14,6 +14,7 @@ export const authenticate: RequestHandler = (req: Request, res, next) => {
 
   // verify token if token exist
   const payload = verify(token);
+  // query user from db
   req.user = payload;
 
   next();

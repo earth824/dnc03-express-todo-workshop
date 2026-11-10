@@ -4,6 +4,7 @@ import { errorHandler } from './middlewares/error-handler.ts';
 import { notFound } from './middlewares/not-found.ts';
 import { authRouter } from './routes/auth.route.ts';
 import { userRouter } from './routes/user.route.ts';
+import { todoRouter } from './routes/todo.route.ts';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
+app.use('/todos', todoRouter);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -1,6 +1,7 @@
 import type { ErrorRequestHandler } from 'express';
 import { AppError } from '../utils/app-error.ts';
 import z, { ZodError } from 'zod';
+import jwt from 'jsonwebtoken';
 
 export const errorHandler: ErrorRequestHandler = (
   error: unknown,
@@ -25,6 +26,17 @@ export const errorHandler: ErrorRequestHandler = (
       message: 'Invalid request data',
       code: 'VALIDATION_ERROR',
       details: formatZodError(error)
+    });
+    return;
+  }
+
+  if (
+    error instanceof jwt.TokenExpiredError ||
+    error instanceof jwt.JsonWebTokenError
+  ) {
+    res.status(401).json({
+      message: 'Invalid token',
+      code: 'INVALID_TOKEN'
     });
     return;
   }

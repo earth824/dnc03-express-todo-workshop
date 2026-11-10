@@ -19,3 +19,4 @@ FEATURE AUTH:
         RESPONSE
           200 user
           401 message
+          404 message

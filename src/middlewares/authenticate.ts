@@ -1,8 +1,8 @@
-import type { RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 import { AppError } from '../utils/app-error.ts';
 import { verify } from '../utils/jwt.ts';
 
-export const authenticate: RequestHandler = (req, res, next) => {
+export const authenticate: RequestHandler = (req: Request, res, next) => {
   const [bearer, token] = req.headers.authorization?.split(' ') ?? [];
   if (bearer !== 'Bearer' || !token) {
     throw new AppError(
@@ -14,4 +14,16 @@ export const authenticate: RequestHandler = (req, res, next) => {
 
   // verify token if token exist
   const payload = verify(token);
+  req.user = payload;
+
+  next();
 };
+
+// DECLARATION MERGING, MODULE AUGMENTATION
+interface A {
+  name: string;
+}
+interface A {
+  age: number;
+}
+// result: interface A {  name: string; age: number; }

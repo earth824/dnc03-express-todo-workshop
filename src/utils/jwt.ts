@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { env } from '../config/env.ts';
 
-type JwtPayload = {
+export type JwtPayload = {
   sub: string;
   email: string;
   role: 'USER' | 'ADMIN';

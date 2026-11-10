@@ -1,0 +1,21 @@
+FEATURE AUTH:
+  - REGISTER
+      POST /auth/register
+        BODY email, password
+        RESPONSE
+          201 message
+          400 message, details?
+          409 message
+  - LOGIN
+      POST /auth/login
+        BODY email, password
+        RESPONSE
+          200 accessToken
+          400 message, details?
+          401 message
+  - GET ME
+      GET /auth/me
+        HEADER Authorization: Bearer xxxxxxxxxx
+        RESPONSE
+          200 user
+          401 message

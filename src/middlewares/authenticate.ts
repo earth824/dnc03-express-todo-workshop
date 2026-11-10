@@ -19,11 +19,19 @@ export const authenticate: RequestHandler = (req: Request, res, next) => {
   next();
 };
 
+export function getAuthUser(req: Request) {
+  const authUser = req.user;
+  if (!authUser) {
+    throw new AppError(401, 'UNAUTHORIZED', 'Auth user is missing');
+  }
+  return authUser;
+}
+
 // DECLARATION MERGING, MODULE AUGMENTATION
-interface A {
-  name: string;
-}
-interface A {
-  age: number;
-}
+// interface A {
+//   name: string;
+// }
+// interface A {
+//   age: number;
+// }
 // result: interface A {  name: string; age: number; }

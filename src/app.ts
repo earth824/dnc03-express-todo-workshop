@@ -1,4 +1,6 @@
 import express from 'express';
+import cors from 'cors';
+
 import { env } from './config/env.ts';
 import { errorHandler } from './middlewares/error-handler.ts';
 import { notFound } from './middlewares/not-found.ts';
@@ -8,6 +10,7 @@ import { todoRouter } from './routes/todo.route.ts';
 
 const app = express();
 
+app.use(cors({ origin: [env.CORS_ORIGIN] }));
 app.use(express.json());
 
 app.use('/auth', authRouter);
